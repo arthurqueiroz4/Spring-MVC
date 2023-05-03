@@ -4,10 +4,7 @@ import curso.spring.model.Pessoa;
 import curso.spring.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -50,6 +47,22 @@ public class PessoaController {
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
         Optional<Pessoa> pessoa = pessoaRepository.findById(id);
         andView.addObject("pessoaobj", pessoa.get());
+        return andView;
+    }
+
+    @GetMapping("removerpessoa/{idpessoa}")
+    public ModelAndView excluir(@PathVariable("idpessoa") Long id){
+        pessoaRepository.deleteById(id);
+        ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+        andView.addObject("pessoas", pessoaRepository.findAll());
+        andView.addObject("pessoaobj", new Pessoa());
+        return andView;
+    }
+    @PostMapping("**/pesquisapessoa")
+    public ModelAndView pesquisar(@RequestParam("nomepesquisa") String nomepesquisa){
+        ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+        andView.addObject("pessoas", pessoaRepository.findPessoaByName(nomepesquisa));
+        andView.addObject("pessoaobj", new Pessoa());
         return andView;
     }
 }

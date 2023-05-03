@@ -41,13 +41,28 @@
             </div>
 
             <div class="row">
+                <button class="waves-effect waves-light btn col s2 offset-s5 indigo darken-1" type="submit" value="Salvar">Salvar</button>
+            </div>
+        </form>
+        <div class="row">
+        <a href="/listapessoas">
+            <button class="waves-effect waves-light btn col s2 offset-s5" type="button" value="Listar">Listar</button>
+        </a>
+        </div>
+        <form class="row" action="pesquisapessoa" method="post">
+            <div class="row">
+            <div class="input-field col s4 offset-s4">
+                <input name="nomepesquisa" type="text" class="validate" th:value="${pessoaobj.nome}">
+                <label>Buscar por nome:</label>
+            </div>
+            </div>
+            <div class="row">
                 <div class="col s6 offset-s3">
-                <button class="waves-effect waves-light btn col s6 offset-s3" type="submit" value="Salvar"></button>
+                    <button class="waves-effect waves-light btn col s2 offset-s5" type="submit" value="Salvar"><i class="material-icons">search</i></button>
                 </div>
             </div>
         </form>
 
-        <a href="/listapessoas">Listar pessoas cadastradas</a>
         <div class="row">
         <table class="striped centered responsive-table">
             <thead>
@@ -55,6 +70,8 @@
                 <th>NOME</th>
                 <th>SOBRENOME</th>
                 <th>IDADE</th>
+                <th>EDITAR</th>
+                <th>EXCLUIR</th>
             </thead>
             <tr th:each = "pessoa : ${pessoas}">
                 <td th:text = "${pessoa.id}"></td>
@@ -62,6 +79,7 @@
                 <td th:text = "${pessoa.sobrenome}"></td>
                 <td th:text = "${pessoa.idade}"></td>
                 <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+                <td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
             </tr>
         </table>
         </div>

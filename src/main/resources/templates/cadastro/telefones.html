@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+        #tela {
+          position: absolute; /* Define a posição absoluta para centralizar */
+          width: 100%;
+          top: 0%; /* Define o topo em 50% da altura do elemento pai */
+
+        }
+    </style>
+</head>
+<body>
+    <div id="tela">
+        <div class="container">
+            <h3>Spring Boot + Thymeleaf + Material Design Lite</h3><br/>
+            <div class="row">
+                <h5 class="center-align col s4 offset-s4">Cadastro de Pessoas:</h5>
+            </div>
+            <br/>
+
+            <div class="row">
+            <form>
+                <div class="row">
+                    <div class="input-field col s3">
+                    <label for="id" class="active">ID:</label>
+                    <input id="id" readonly="readonly" th:value="${pessoaobj.id}">
+                    </div>
+                    <div class="input-field col s3">
+                    <label for="nome" class="active">Nome:</label>
+                    <input id="nome" readonly="readonly" th:value="${pessoaobj.nome}">
+                    </div>
+                    <div class="input-field col s3">
+                        <label for="sobrenome" class="active">Sobrenome:</label>
+                        <input id="sobrenome" readonly="readonly" th:value="${pessoaobj.sobrenome}">
+                    </div>
+                    <div class="input-field col s3">
+                        <label for="idade" class="active">Idade:</label>
+                        <input id="idade" readonly="readonly" th:value="${pessoaobj.idade}">
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <a class="waves-effect waves-light btn col s1 offset-s11" href="/cadastropessoa">Home</a>
+            </div>
+            </div>
+            <div class="row">
+                <h5>Telefones</h5>
+            </div>
+            <div class="row">
+                <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" onsubmit="return validarCampos() ? true : false" method="post" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <label class="active" for="numero">Número:</label>
+                            <input id="numero" name="numero" type="text" class="validate" th:value="${telefoneobj.numero}">
+                        </div>
+                        <div class="input-field col s6">
+                            <label class="active" for="tipo">Tipo:</label>
+                            <input id="tipo" name="tipo" type="text" class="validate" th:value="${telefoneobj.tipo}">
+                        </div>
+                        <button type="submit" class="waves-effect waves-light btn col s1 offset-s11 indigo darken-1">Salvar</button>
+                    </div>
+                </form>
+            </div>
+
+            <table class="striped centered responsive-table">
+                <thead>
+                    <th>ID</th>
+                    <th>NÚMERO</th>
+                    <th>TIPO</th>
+                </thead>
+                <tr th:each="fone : ${telefones}">
+                    <td th:text="${fone.id}"></td>
+                    <td th:text="${fone.numero}"></td>
+                    <td th:text="${fone.tipo}"></td>
+                    <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a></td>
+                </tr>
+            </table>
+
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="/materialize/js/materialize.js"></script>
+<script type="text/javascript" src="/materialize/js/materialize.min.js"></script><script type="text/javascript">
+  function validarCampos(){
+	  numero = document.getElementById('numero').value;
+	  tipo = document.getElementById('tipo').value;
+	  if (numero === ''){
+		  alert('Numero deve ser informado');
+		  return false;
+	  }
+	  else if (tipo === '') {
+		  alert('Tipo deve ser informado');
+		  return false;
+	  }
+
+	  return true;
+  }
+ </script>
+</body>
+</html>

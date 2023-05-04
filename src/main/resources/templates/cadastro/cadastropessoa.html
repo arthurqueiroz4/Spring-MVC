@@ -6,48 +6,50 @@
     <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        html, body {
-            height: 100%;
-        }
-        #tela {
-          position: absolute; /* Define a posição absoluta para centralizar */
-          width: 100%;
-          top: 15%; /* Define o topo em 50% da altura do elemento pai */
-        }
-    </style>
 </head>
 <body>
     <div id="tela">
         <div class="container">
-        <form  class="row" action="salvarpessoa" method="post">
+        <h3>Spring Boot + Thymeleaf + Material Design Lite</h3><br/>
+        <div class="row">
+            <h5 class="col s4">Cadastro de Pessoas:</h5>
+        </div>
+        <br/>
+        <div class="row">
+        <div th:each="m : ${msg}">
+                <span class="btn red col-s2 offset-s1" th:text="${m}"></span>
+        </div>
+        </div>
+        <br/>
+        <form id="formpessoa" class="row" action="salvarpessoa" method="post">
             <div class="row">
                 <div class="input-field col s3">
-                    <input name="id" type="text" readonly="readonly" th:value="${pessoaobj.id}">
-                    <label>ID:</label>
+                    <label for="id" class="active">ID:</label>
+                    <input id="id" name="id" type="text" readonly="readonly" th:value="${pessoaobj.id}">
+
                  </div>
                 <div class="input-field col s3">
-                    <input name="nome" type="text" class="validate" th:value="${pessoaobj.nome}">
-                    <label>Nome:</label>
+                    <label for="nome" class="active">Nome:</label>
+                    <input id="nome" name="nome" type="text" class="validate" th:value="${pessoaobj.nome}">
+
                 </div>
                 <div class="input-field col s3">
-                    <input name="sobrenome" type="text" class="validate" th:value="${pessoaobj.sobrenome}">
-                    <label>Sobrenome:</label>
+                    <input id="sobrenome" name="sobrenome" type="text" class="validate" th:value="${pessoaobj.sobrenome}">
+                    <label for="sobrenome">Sobrenome:</label>
                 </div>
                 <div class="input-field col s3">
-                    <input name="idade" type="text" class="validate" th:value="${pessoaobj.idade}">
-                    <label>Idade:</label>
+                    <input id="idade" name="idade" type="text" class="validate" th:value="${pessoaobj.idade}">
+                    <label for="idade">Idade:</label>
                 </div>
             </div>
 
-            <div class="row">
-                <button class="waves-effect waves-light btn col s2 offset-s5 indigo darken-1" type="submit" value="Salvar">Salvar</button>
-            </div>
+
+                <button class="waves-effect waves-light btn col s1 offset-s4 indigo darken-1" type="submit" value="Salvar">Salvar</button>
+                <button class="waves-effect waves-light btn col s1 offset-s1 indigo darken-1" type="submit" value="Reset" onclick="document.getElementById('formpessoa').reset();">Reset</button>
+
         </form>
         <div class="row">
-        <a href="/listapessoas">
-            <button class="waves-effect waves-light btn col s2 offset-s5" type="button" value="Listar">Listar</button>
-        </a>
+
         </div>
         <form class="row" action="pesquisapessoa" method="post">
             <div class="row">
@@ -57,9 +59,10 @@
             </div>
             </div>
             <div class="row">
-                <div class="col s6 offset-s3">
-                    <button class="waves-effect waves-light btn col s2 offset-s5" type="submit" value="Salvar"><i class="material-icons">search</i></button>
-                </div>
+                <button class="waves-effect waves-light btn col s1 offset-s4" type="submit" value="Salvar"><i class="material-icons">search</i></button>
+                <a href="/listapessoas">
+                    <button class="waves-effect waves-light btn col s2 offset-s1" type="button" value="Listar">Listar Todos</button>
+                </a>
             </div>
         </form>
 
@@ -75,7 +78,7 @@
             </thead>
             <tr th:each = "pessoa : ${pessoas}">
                 <td th:text = "${pessoa.id}"></td>
-                <td th:text = "${pessoa.nome}"></td>
+                <td> <a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}" th:text = "${pessoa.nome}"></a> </td>
                 <td th:text = "${pessoa.sobrenome}"></td>
                 <td th:text = "${pessoa.idade}"></td>
                 <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
@@ -83,6 +86,11 @@
             </tr>
         </table>
         </div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
+            <div class="row"></div>
         </div>
     </div>
 <script type="text/javascript" src="/materialize/js/materialize.js"></script>

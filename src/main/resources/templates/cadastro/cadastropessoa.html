@@ -24,13 +24,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <h5 class="col s4">Cadastro de Pessoas:</h5>
         </div>
         <br/>
-        <div class="row">
-        <div th:each="m : ${msg}">
-                <span class="btn red col-s2 offset-s1" th:text="${m}"></span>
-        </div>
-        </div>
-        <br/>
-        <form id="formpessoa" class="row" action="salvarpessoa" method="post">
+        <div id="cadastro">
+            <div class="row">
+                <div style="display: inline-block; margin-right: 10px;margin-bottom: 20px;" th:each="m : ${msg}">
+                        <span class="btn red col-s2 offset-s1 mb-2 mt-2"  th:text="${m}"></span>
+                </div>
+            </div>
+            <br/>
+            <form id="formpessoa" class="row" action="salvarpessoa" method="post">
             <div class="row">
                 <div class="input-field col s3">
                     <label for="id" class="active">ID:</label>
@@ -39,21 +40,21 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                  </div>
                 <div class="input-field col s3">
                     <label for="nome" class="active">Nome:</label>
-                    <input id="nome" name="nome" type="text" class="validate" th:value="${pessoaobj.nome}">
+                    <input id="nome" placeholder="Digite o nome da pessoa" name="nome" type="text" class="validate" th:value="${pessoaobj.nome}">
 
                 </div>
                 <div class="input-field col s3">
-                    <input id="sobrenome" name="sobrenome" type="text" class="validate" th:value="${pessoaobj.sobrenome}">
+                    <input id="sobrenome" placeholder="Digite o sobrenome da pessoa" name="sobrenome" type="text" class="validate" th:value="${pessoaobj.sobrenome}">
                     <label for="sobrenome">Sobrenome:</label>
                 </div>
                 <div class="input-field col s3" >
-                    <input id="idade" name="idade" type="text" class="validate" th:value="${pessoaobj.idade}">
+                    <input id="idade" name="idade" placeholder="Digite a idade da pessoa" type="number" class="validate" th:value="${pessoaobj.idade}">
                     <label for="idade">Idade:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s3">
-                    <input id="cep" name="cep" class="validate" th:value="${pessoaobj.cep}">
+                    <input id="cep" name="cep" placeholder="Informe CEP válido" class="validate" th:value="${pessoaobj.cep}">
                     <label for="cep" class="active">CEP:</label>
                 </div>
                 <div class="input-field col s3">
@@ -84,12 +85,11 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 
                 <button class="waves-effect waves-light btn col s1 offset-s4 indigo darken-1" type="submit" value="Salvar">Salvar</button>
-                <button class="waves-effect waves-light btn col s1 offset-s1 indigo darken-1" type="submit" value="Reset" onclick="document.getElementById('formpessoa').reset();">Reset</button>
+                <button class="waves-effect waves-light btn col s1 offset-s2 indigo darken-1" type="button" value="Reset" onclick="limparCampos()">Reset</button>
 
         </form>
+        </div>
         <div class="row">
-
-
         </div>
         <form class="row" action="pesquisapessoa" method="post">
             <div class="row">
@@ -211,6 +211,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             });
         });
 
+    function limparCampos(){
+        const formulario = document.querySelector('#formpessoa');
+        const campos = formulario.querySelectorAll('input, textarea');
+
+        campos.forEach(campo => {
+          campo.value = "";
+        });
+        $("#idade").val(0);
+    }
     </script>
 </body>
 </html>

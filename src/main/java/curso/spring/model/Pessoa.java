@@ -22,15 +22,27 @@ public class Pessoa {
     @NotEmpty(message = "Sobrenome não pode ser vazio")
     private String sobrenome;
     @Min(value = 18, message = "Idade inválida")
+    @NotNull(message = "Idade não pode ser nulo")
     private int idade;
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Telefone> telefones;
-
+    @NotNull(message ="Campo CEP não pode ser nulo")
+    @NotEmpty(message = "Campo CEP não pode ser vazio")
     private String cep;
+    @NotNull(message = "Campo rua não pode ser nulo")
+    @NotEmpty(message = "Campo rua não pode ser vazio")
     private String rua;
+    @NotNull(message = "Campo bairro não pode ser vazio")
+    @NotEmpty(message = "Campo bairro não pode ser vazio")
     private String bairro;
+    @NotNull(message = "Campo cidade não pode ser vazio")
+    @NotEmpty(message = "Campo cidade não pode ser vazio")
     private String cidade;
+    @NotNull(message = "Campo uf não pode ser vazio")
+    @NotEmpty(message = "Campo uf não pode ser vazio")
     private String uf;
+    @NotNull(message = "Campo ibge não pode ser vazio")
+    @NotEmpty(message = "Campo ibge não pode ser vazio")
     private String ibge;
 
     public String getCep() {

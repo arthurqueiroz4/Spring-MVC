@@ -3,6 +3,8 @@ package curso.spring.controller;
 import curso.spring.model.Pessoa;
 import curso.spring.repository.PessoaRepository;
 import javax.validation.Valid;
+
+import curso.spring.repository.TelefoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,6 +21,8 @@ public class PessoaController {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private TelefoneRepository telefoneRepository;
 
     @RequestMapping(method = RequestMethod.GET, value = "**/cadastropessoa")
     public ModelAndView inicio(){
@@ -31,12 +35,13 @@ public class PessoaController {
     @RequestMapping(method = RequestMethod.POST, value = "/**/salvarpessoa")
     public ModelAndView salvar (@Valid Pessoa pessoa, BindingResult bindingResult){
 
+        pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
+
         if (bindingResult.hasErrors()){
             ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
             Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
             modelAndView.addObject("pessoas", pessoasIt);
             modelAndView.addObject("pessoaobj", pessoa);
-
             List<String> msg =new ArrayList<String>();
             for (ObjectError erro : bindingResult.getAllErrors()) {
                 msg.add(erro.getDefaultMessage());

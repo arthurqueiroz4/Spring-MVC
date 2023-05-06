@@ -26,6 +26,71 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Telefone> telefones;
 
+    private String cep;
+    private String rua;
+    private String bairro;
+    private String cidade;
+    private String uf;
+    private String ibge;
+
+    public String getCep() {
+        return cep;
+    }
+
+    public Pessoa setCep(String cep) {
+        this.cep = cep;
+        return this;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public Pessoa setRua(String rua) {
+        this.rua = rua;
+        return this;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public Pessoa setBairro(String bairro) {
+        this.bairro = bairro;
+        return this;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public Pessoa setCidade(String cidade) {
+        this.cidade = cidade;
+        return this;
+    }
+
+
+
+    public String getUf() {
+        return uf;
+    }
+
+    public Pessoa setUf(String uf) {
+        this.uf = uf;
+        return this;
+    }
+
+    public String getIbge() {
+        return ibge;
+    }
+
+    public Pessoa setIbge(String ibge) {
+        this.ibge = ibge;
+        return this;
+    }
+
+
+
     public List<Telefone> getTelefones() {
         return telefones;
     }

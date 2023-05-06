@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+</head>
+<body class="center-align">
+
+
+<h1>Acesso ao sistema</h1>
+<form th:action="@{/login}" method="post" class="col s12">
+
+  <div class="row">
+      <div class="input-field col s6 offset-s3">
+          <label for="login" class="active">Login</label>
+          <input id="login" type="text" name="username" class="active">
+      </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s6 offset-s3">
+        <label for="password" class="active">Senha</label>
+        <input id="password" type="password" name="password" class="active">
+    </div>
+  </div>
+  <div class="row">
+    <input name="Logar" value="Logar" type="submit" class="waves-effect waves-light btn">
+  </div>
+</form>
+
+
+
+</body>
+</html>

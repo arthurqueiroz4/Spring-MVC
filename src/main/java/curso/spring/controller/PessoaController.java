@@ -20,7 +20,7 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
+    @RequestMapping(method = RequestMethod.GET, value = "**/cadastropessoa")
     public ModelAndView inicio(){
         ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
         andView.addObject("pessoas", pessoaRepository.findAll());

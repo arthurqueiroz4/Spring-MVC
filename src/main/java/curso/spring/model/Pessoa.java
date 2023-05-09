@@ -1,5 +1,7 @@
 package curso.spring.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -7,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -44,6 +47,51 @@ public class Pessoa {
     @NotNull(message = "Campo ibge não pode ser vazio")
     @NotEmpty(message = "Campo ibge não pode ser vazio")
     private String ibge;
+    @NotEmpty(message = "Campo sexo não selecionado")
+    private String sexo;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dataNasc;
+    @Lob
+    private byte[] file;
+    private String nomeFileCurriculo;
+    private String tipoFileCurriculo;
+
+    public String getNomeFileCurriculo() {
+        return nomeFileCurriculo;
+    }
+
+    public Pessoa setNomeFileCurriculo(String nomeFileCurriculo) {
+        this.nomeFileCurriculo = nomeFileCurriculo;
+        return this;
+    }
+
+    public String getTipoFileCurriculo() {
+        return tipoFileCurriculo;
+    }
+
+    public Pessoa setTipoFileCurriculo(String tipoFileCurriculo) {
+        this.tipoFileCurriculo = tipoFileCurriculo;
+        return this;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public Pessoa setFile(byte[] file) {
+        this.file = file;
+        return this;
+    }
+
+    public Date getDataNasc() {
+        return dataNasc;
+    }
+
+    public Pessoa setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
+        return this;
+    }
 
     public String getCep() {
         return cep;
@@ -56,6 +104,15 @@ public class Pessoa {
 
     public String getRua() {
         return rua;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public Pessoa setSexo(String sexo) {
+        this.sexo = sexo;
+        return this;
     }
 
     public Pessoa setRua(String rua) {

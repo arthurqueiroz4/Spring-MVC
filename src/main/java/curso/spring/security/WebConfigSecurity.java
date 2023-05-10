@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.ModelAndView;
 
 @Configuration
 @EnableWebSecurity
@@ -33,7 +34,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter{
                 .and().formLogin()// permite qualquer usuário
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/cadastropessoa", true)
-                .failureUrl("/login?error=true")
+                .failureUrl("/login")
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 // Mapeia URL de Logout e invalida usuário autenticado
